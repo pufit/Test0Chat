@@ -1,0 +1,230 @@
+﻿body{
+    margin:0;
+    background-image: url(/img/image.jpg);
+    background-size: 150%;
+}
+.sub-menu
+{
+    display: none;
+}
+.smile{
+    position: absolute;
+    left:305px;
+    top:5px;
+    width: 40px;
+    height: 50px;
+    border: none;
+    background: url(/img/smile_icon.png) no-repeat 50% 50%;
+    background-size: 20px;
+    outline: none
+}
+.smiles{
+    border: none;
+    outline: none
+}
+.smile:focus ~ .sub-menu,
+.smile:active ~ .sub-menu,
+.sub-menu:hover{
+    display: block;
+    position: absolute;
+    left:265px;
+    top:80px;
+    z-index: 99;
+    background-color: #e1e1e1;
+    border: solid 3px #b5e61d;
+    padding:10px;
+    border-radius: 10px;
+}
+.block1logo {
+    width: 150px;
+    height: 50px;
+    background-color: #e1e1e1;
+    color: #b5e61d;
+    padding: 30px;
+    font-size:40px;
+    border: solid 3px #b5e61d;
+    position: relative;
+    top: 120px;
+    left: 55px;
+    text-shadow: 1px 1px 2px #166F00;
+    box-shadow: 1px 1px 4px #166F00;
+    border-radius: 5px
+}
+.login{
+    position: relative;
+    width: 250px;
+    height: 70px;
+    top: 200px;
+    left: 55px;
+    background-color: #e1e1e1;
+    color: #b5e61d;
+    padding:10px;
+    border: solid 3px #b5e61d;
+    box-shadow: 1px 1px 4px #166F00;
+}
+.logintext{
+    text-shadow: 1px 1px 2px black;
+}
+.block2{
+    position: absolute;
+    left:350px;
+    top:0;
+    height:100%;
+    width: 700px;
+    background-color: #e1e1e1;
+    min-width: 600px;
+    box-shadow: 0 0 5px #373737;
+    border-left: solid 5px #7F7F7F;
+    border-right: solid 5px #7F7F7F;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.block2send{
+    position: relative;
+    width: 700px;
+    height: 90px;
+    border-bottom: solid 5px #7F7F7F;
+    box-shadow: 0 0 7px #373737;
+}
+.block2text{
+    position: relative;
+    left:100px;
+    top:20px;
+    width:500px;
+}
+.block2chat{
+    position:relative;
+    top:10px;
+    left: 10px;
+    padding-right: 50px;
+    font-size:18px;
+}
+.textform{
+    width:300px;
+    height:40px;
+    border:solid 2px #b5e61d;
+    padding:2px;
+    box-shadow: 0 0 5px #b5e61d;
+    border-radius: 5px;
+    outline: none;
+    word-wrap: break-word;
+    resize: none;
+    padding-right: 50px;
+    padding-top:10px;
+}
+.block2button{
+    position:relative;
+    left: 480px;
+    top:-25px;
+}
+.lc{
+    position: relative;
+    top: 200px;
+    left: 55px;
+    width: 230px;
+    height: 280px;
+    background-color: #e1e1e1;
+    border: solid 3px #b5e61d;
+    box-shadow: 1px 1px 4px #166F00;
+    padding:10px;
+    text-align: center;
+}
+.img{
+    position: absolute;
+    top:70px;
+    left:95px;
+    border:solid 2px #b5e61d;
+    box-shadow: 0 0 5px #b5e61d;
+    border-radius:50%;
+    width:60px;
+    height: 60px;
+}
+img{
+    border:solid 2px #b5e61d;
+    box-shadow: 0 0 5px #b5e61d;
+    border-radius:50%;
+    width: 30px;
+    height: 30px;
+}
+.text1{
+    position: relative;
+    font-size: 25px;
+}
+.text2{ /* ПЕРЕНЕСТИ В <head> !!! */
+    position: relative;
+    font-size: 25px;
+}
+.text3{
+    position: relative;
+    font-size: 20px;
+    text-align: left;
+    top:85px;
+    left:5px;
+    line-height: 30px;
+    white-space: nowrap;
+}
+.message{
+    position: relative;
+    bottom: 10px;
+    line-height: 30px;
+    word-wrap: break-word;
+}
+.pm{
+    position: absolute;
+    top: -10px;
+    left:40px;
+    font-size: 15px;
+    color: #e8bb00;
+    text-shadow: 1px 1px 0px #433E00;
+}
+.message1{
+    margin-top:10px;
+    border-bottom: solid 2px #7F7F7F;
+    position: relative;
+}
+.counter{
+    position: absolute;
+    left: 1080px;
+    top:135px;
+    width:140px;
+    height:100px;
+    background-color: #e1e1e1;
+    border: solid 3px #b5e61d;
+    box-shadow: 1px 1px 4px #166F00;
+    font-size: 20px;
+    text-align: center;
+}
+.time{
+    position: absolute;
+    right:0;
+    top: -10px;
+    font-size: 15px;
+    color: #373737;
+}
+.number{
+    text-align: center;
+    margin-top: 10px;
+}
+.User{
+    position: relative;
+    bottom: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color:#000;
+}
+.Admin{
+    background: url(/img/bling1.gif) repeat scroll transparent;
+    font-weight: bold;
+    color:crimson;
+    position: relative;
+    bottom: 10px;
+    text-decoration: none;
+}
+.Legendary{
+    background: url(/img/bling5.gif) repeat scroll transparent;
+    color:#722DA8;
+    font-weight: bold;
+    position: relative;
+    bottom: 10px;
+    text-decoration: none;
+}

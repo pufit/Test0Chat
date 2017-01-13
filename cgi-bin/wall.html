@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" >
+    <title>Test0chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="block1logo">
+        test0chat
+</div>
+<div class="lc">
+    <a class="text1">Добро пожаловать <a class="status" style="position: relative; font-size: 25px">User</a></a>
+    <img src="avatar.jpg" class ="img" height="60" width="60">
+    <div class="text3">
+        <!--<a>Ваш уровень: 153</a>--><br>
+        <a>Ваш статус:<span class="status" style="position: relative; left: 15px;"> Admin</span></a><br>
+        <a style="color:#373737" href="lc.py">Личный кабинет</a>
+    </div>
+</div>
+
+<!-- <div class="login">
+    <a class="logintext">Войдите или </a> <a href="">зарегестрируйтесь!</a>
+    <form action="/cgi-bin/wall.py" method="post">
+        <input type="text" name="login" placeholder="Логин">
+        <input type="password" placeholder="Пароль"name="password">
+        <input type="hidden" name="action" value="login">
+        <input type="submit" value="Войти">
+    </form>
+</div>  -->
+<div class="block2">
+    <div class="block2send">
+        <form id="form" action="/cgi-bin/wall.py" method="post" class="form">
+            <div class="block2text">
+                <input name="text" placeholder="Напишите сообщение..." class="textform">
+            </div>
+            <div class="block2button">
+                <input type="hidden" name="action" value="publish">
+                <input type="submit" id="Submit" name="submit" value="Отправить">
+                <input type="button" class="smile">
+            </div>
+            <div class="block2chat">
+                <br>
+                <div class="message1">
+                    <a class="time">03.1.2017 14:09:07</a>
+                    <img alt="" src="avatar.jpg" class ="img1" height="30" width="30">
+                    <span class="status" style="position: relative; bottom: 10px">Admin</span>
+                    <a class="pm">Личное сообщение</a>
+                    <a class="message">: Test Test 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 1234 4321</a>
+                    <br>
+                </div>
+                <div class="message1">
+                    <a class="time">03.1.2017 14:09:07</a>
+                    <img src="avatar.jpg" class ="img1" height="30" width="30">
+                    <span class="status" style="position: relative; bottom: 10px">Admin</span>
+                    <a class="pm">Личное сообщение</a>
+                    <a class="message">: Это тест!</a><br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

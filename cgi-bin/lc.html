@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="lc.css">
+</head>
+<body>
+<div class="block2">
+    <div class="name">
+    <h2>{users}<img src="{avatars}?id={randoms}" class ="img" height="60" width="60" > </h2>
+    </div>
+    <div class="form">
+        <form enctype="multipart/form-data"
+            action="lc.py" method="post">
+            <p>File: <input type="file" name="filename" accept="image/*"></p>
+            <p><input type="submit" value="Upload"></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

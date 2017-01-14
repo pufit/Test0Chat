@@ -51,3 +51,4 @@ cgi-bin/bd/cookies.json
 cgi-bin/bd/cookies.json
 cgi-bin/bd/wall.json
 cgi-bin/bd/sessions-online.json
+*.json

@@ -28,7 +28,7 @@ with open('cgi-bin/bd/sessions-online.json', 'r', encoding='utf-8') as f:
         online_users = json.load(f)
 b = online_users.copy()
 for i in online_users:
-        if (time.time()-float(online_users[i])) > 3:
+        if (time.time()-float(online_users[i])) > 5:
                 b.pop(i)
         online_users = b.copy()
 if user is not None:

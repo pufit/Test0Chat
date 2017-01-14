@@ -46,3 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .idea/workspace.xml
+*.xml
+cgi-bin/bd/cookies.json
+cgi-bin/bd/cookies.json
+cgi-bin/bd/wall.json

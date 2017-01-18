@@ -1,3 +1,4 @@
+#!c:\Python34\python.exe
 import os
 import cgi
 import json
@@ -8,7 +9,7 @@ wall= Wall()
 storage = cgi.FieldStorage()
 text = storage.getvalue('text')
 #ids = storage.getvalue('ids')
-if wall.check_ban(cgi.escape(os.environ["REMOTE_ADDR"]))==True: #Проверяем ip в бан листе
+if wall.check_ban(html.escape(os.environ["REMOTE_ADDR"]))==True: #Проверяем ip в бан листе
     ban='<a>Ваш ip добавлен в чёрный список<a>'
     user = None
 else: #Находим пользователя по куки

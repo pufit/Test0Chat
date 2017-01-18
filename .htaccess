@@ -1,0 +1,4 @@
+AddDefaultCharset Off
+<IfModule dir_module>
+    DirectoryIndex index.html index.htm index.pl index.py
+</IfModule>

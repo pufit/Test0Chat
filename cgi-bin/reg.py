@@ -1,3 +1,4 @@
+#!c:\Python34\python.exe
 import cgi
 import html
 import http.cookies
@@ -66,7 +67,7 @@ repassword = form.getfirst("repassword", "")
 repassword = html.escape(repassword)
 checkbox = form.getfirst("checkbox", "")
 if (password==repassword) and((password!='') and (login!='')) and (checkbox!=''):
-    if wall.register(login, password, cgi.escape(os.environ["REMOTE_ADDR"]))==True:
+    if wall.register(login, password, html.escape(os.environ["REMOTE_ADDR"]))==True:
         cookie = wall.set_cookie(login)
         print('Set-cookie: session={}'.format(cookie))
         k=1

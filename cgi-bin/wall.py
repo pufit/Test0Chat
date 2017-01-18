@@ -1,6 +1,7 @@
-#!/usr/bin/env python3
+#!c:\Python34\python.exe
 # -*- coding: utf-8 -*-
-
+import cgitb
+cgitb.enable()
 import cgi
 import cgitb
 import html
@@ -43,7 +44,6 @@ if action == "login": #Заходим
     if wall.find(login, password)==True:
         cookie = wall.set_cookie(login)
         print('Set-cookie: session={}'.format(cookie))
-        #re ='''HTTP-EQUIV="REFRESH" CONTENT="1; URL=wall.py"'''
         user = wall.find_cookie(cookie)
     elif wall.find(login, password)=='Ban':
         reg='Этот пользователь заблокирован'
@@ -51,7 +51,6 @@ if action == "login": #Заходим
         reg='Неверный логин или пароль'
 elif action =="Exit": #Выходим
     print('''Set-cookie: session="" ''')
-    #re ='''HTTP-EQUIV="REFRESH" CONTENT="1; URL=wall.py"'''
     user = None
 
 #Наш любимый js
@@ -174,15 +173,9 @@ addHandler(document, "click", function() {
 </script>
 <link rel="stylesheet" href="/assets/main.css">
 '''
-#Фигня, нужно будет потом убрать
-style='''
-    background: url(/{pathimgs}) repeat scroll transparent;
-    font-weight: bold;
-    color:{colors};
-'''
+
 qwert = wall.get_status(user)
-style=style.format(pathimgs = qwert[0], colors = qwert[1])
-style='<style>.status{'+style+'</style>'
+
 pattern = '''
 <!DOCTYPE HTML>
 <html>
@@ -190,7 +183,6 @@ pattern = '''
 <meta charset="UTF-8" {res} >
 <title>Тест</title>
 {scripts}
-{styles}
 </head>
 <body>
 {bans}
@@ -237,11 +229,11 @@ if user is not None:
     '''
     lc = '''
     <div class="lc">
-    <a class="text1">Добро пожаловать <a class="status" style="position: relative; font-size: 25px">{Users}</a></a>
+    <a class="text1">Добро пожаловать <a class="{status1}" style="position: relative; font-size: 25px; top:0;">{Users}</a></a>
     <img src="{imgs}" class ="img" height="60" width="60">
     <div class="text3">
         <br>
-        <a>Ваш статус:<span class="status" style="position: relative; left: 15px;">{status}</span></a><br>
+        <a>Ваш статус:<span class="{status1}" style="position: relative; left: 15px; top:0;">{status}</span></a><br>
         <a style="color:#373737" href="lc.py">Личный кабинет</a>
         <form class="exit" action="/cgi-bin/wall.py" method="post">
             <input type="hidden" name="action" value="Exit">
@@ -251,12 +243,8 @@ if user is not None:
     </div>
     '''
     pubs=''
-    try:
-        open('users/'+user+'/'+user+'.jpg', 'r')
-        img = '/users/'+user+'/'+user+'.jpg?_='+rand
-    except:
-        img = '/users/default.jpg?_='+rand
-    lc = lc.format(status=qwert[2], imgs=img, Users=user)
+    img = '/users/'+user+'/'+user+'.jpg?_='+rand
+    lc = lc.format(status=qwert[2], imgs=img, Users=user, status1 = wall.get_status(user)[2])
 else:
     pub = ''
     lc = ''
@@ -273,7 +261,8 @@ else:
 </div>
 '''
     pubs=pubs.format(regs=reg)
-print("HTTP/1.0 200 OK")
-print('Content-type: text/html\n')
-print(pattern.format(publish=pub, res=re, publ=pubs, exits=ex, scripts=script, bans=ban, styles=style, lcs=lc))
+#print("HTTP/1.0 200 OK")
+print("Content-type: text/html")
+print("")
+print(pattern.format(publish=pub, res=re, publ=pubs, exits=ex, scripts=script, bans=ban, lcs=lc))
 

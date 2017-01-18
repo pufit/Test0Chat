@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!c:\Python34\python.exe
 # -*- coding: utf-8 -*-
 import random
 import cgi
@@ -28,11 +28,7 @@ if session is not None:
         file='Загрузка прошла успешно'
     except:
         pass
-    try:
-        open('users/'+user+'/'+user+'.jpg', 'r')
-        avatar = '/users/'+user+'/'+user+'.jpg'
-    except:
-        avatar = '/users/default.jpg'
+    avatar = '/users/' + user + '/' + user + '.jpg'
     a = '''
 <!DOCTYPE html>
 <html>
@@ -72,6 +68,5 @@ else:
 </body>
 </html>
 '''
-print("HTTP/1.0 200 OK")
-print('Content-type: text/html\n')
+print('Content-type: text/html\n\n')
 print(a.format(files=file, users=user, avatars = avatar, randoms=random))

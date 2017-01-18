@@ -1,4 +1,6 @@
+#!c:\Python34\python.exe
 # -*- coding: utf-8  -*-
+
 import cgi
 import cgitb
 import html
@@ -24,7 +26,7 @@ if session is not None:
 user = wall.find_cookie(session)
 
 ip = os.environ["REMOTE_ADDR"]
-with open('cgi-bin/bd/sessions-online.json', 'r', encoding='utf-8') as f:
+with open(wall.SESSIONS, 'r', encoding='utf-8') as f:
         online_users = json.load(f)
 b = online_users.copy()
 for i in online_users:
@@ -34,7 +36,7 @@ for i in online_users:
 if user is not None:
         b = {user:str(time.time())}
         online_users.update(b)
-        with open('cgi-bin/bd/sessions-online.json', 'w', encoding='utf-8') as f:
+        with open(wall.SESSIONS, 'w', encoding='utf-8') as f:
             json.dump(online_users, f)
 for i in online_users:
         users.append(i)

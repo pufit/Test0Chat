@@ -1,3 +1,4 @@
+#!c:\Python34\python.exe
 # -*- coding: utf-8  -*-
 
 #Начну я пожалуй коментить. Говорящие название файла
@@ -34,7 +35,7 @@ else: #Находим пользователя по куки
     user1 = wall1.find_cookie(session)
 status1 = wall1.get_status(user1)[3]
 
-with open('cgi-bin/bd/wall.json', 'r', encoding='utf-8') as f:
+with open(wall1.WALL, 'r', encoding='utf-8') as f:
     wall = json.load(f)
 for i in wall["posts"]:
     user = i['user']
@@ -63,7 +64,7 @@ for i in wall["posts"]:
     if k!=1:
         posts = '<div class="message1" '+click+'><a class="time">'+time+'</a><img src="'+img+'" class ="img1" height="30" width="30"><a id="nick" onclick="return pm(\''+user+'\');" href="#" class="'+status+'">'+user+'</a>'+pm1+'<a class="message">: </a><a class="message"'+pm+'>'+text+'</a><br></div>'+posts
 posts = '<meta charset="UTF-8" http-equiv="cache-control" content="no-cache"><br>'+posts
-print("HTTP/1.0 200 OK")
+
 print('Content-type: text/html\n')
 print(posts)
 

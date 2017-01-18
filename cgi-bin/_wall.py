@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!c:\Python34\python.exe
 # -*- coding: utf-8 -*-
 
 import json
@@ -12,15 +12,16 @@ from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 #sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 class Wall:
-    USERS = 'cgi-bin/bd/users.json'
-    WALL = 'cgi-bin/bd/wall.json'
-    COOKIES = 'cgi-bin/bd/cookies.json'
-    IP = 'cgi-bin/bd/ip.json'
-    BANIP = 'cgi-bin/bd/ban-list.json'
-    SAVEDIR = 'users/'
-    PEX = 'cgi-bin/bd/permissions.json'
-    PUSERS = 'cgi-bin/bd/perusers.json'
-    ID = 'cgi-bin/bd/id.json'
+    USERS = 'bd/users.json'
+    WALL = 'bd/wall.json'
+    COOKIES = 'bd/cookies.json'
+    IP = 'bd/ip.json'
+    BANIP = 'bd/ban-list.json'
+    SAVEDIR = '../users/'
+    PEX = 'bd/permissions.json'
+    PUSERS = 'bd/perusers.json'
+    ID = 'bd/id.json'
+    SESSIONS = 'bd/sessions-online.json'
     
     def __init__(self):
         try:
@@ -64,8 +65,10 @@ class Wall:
         users[user] = hashlib.md5(password.encode()).hexdigest()
         with open(self.USERS, 'w', encoding='utf-8') as f:
             json.dump(users, f)
+        os.chdir('../')
         os.makedirs('users/'+user)
         shutil.copy('users/default.jpg','users/'+user+'/'+user+'.jpg')
+        os.chdir('cgi-bin')
         return True
 
     def check_ban(self, ip):
@@ -110,7 +113,12 @@ class Wall:
             pass
         outpath = os.path.join(upload_dir, user+'.jpg')
         with open(outpath, 'wb') as fout:
-            shutil.copyfileobj(fileitem.file, fout)
+            #shutil.copyfileobj(fileitem.file, fout)
+            while 1:
+                chunk = fileitem.file.read(100000)
+                if not chunk: break
+                fout.write(chunk)
+            fout.close()
         im = Image.open(outpath)
         x,y = im.size
         z=min(x,y)
@@ -126,21 +134,9 @@ class Wall:
         im.save(outpath, quality=quality)
         
     def publish(self, user, text):
-#        with open(self.ID, 'r', encoding='utf-8') as f:
-#            allids = json.load(f)
-#        if ids in allids:
-#            return False
-#        else:
-#            allids.append(ids)
-#        with open(self.ID, 'w', encoding='utf-8') as f:
-#            json.dump(allids, f)
         with open(self.WALL, 'r', encoding='utf-8') as f:
             wall = json.load(f)
-        try:
-            open('users/'+user+'/'+user+'.jpg', 'r')
-            img = '/users/'+user+'/'+user+'.jpg'
-        except:
-            img = '/users/default.jpg'
+        img = '/users/'+user+'/'+user+'.jpg'
         #Немного индусского кода
         ms = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
         if len(str(int(time.ctime()[8]+time.ctime()[9])))==1:
@@ -157,11 +153,6 @@ class Wall:
         wall['posts'].append({'user': user, 'text': text, 'img': img, 'time':date})
         with open(self.WALL, 'w', encoding='utf-8') as f:
             json.dump(wall, f)
-       # wal = open('ajax/wall.html', 'r').read()
-       # wal = wal.replace('<meta charset="Windows-1251" http-equiv="cache-control" content="no-cache"><br>','')
-       # status = user.replace(' ', '_')
-       # wal ='<meta charset="Windows-1251" http-equiv="cache-control" content="no-cache"><br>'+'<div class="message1"><img src="'+img+'" class ="img1" height="30" width="30"><span class="'+status+'" style="position: relative; bottom: 10px; font-weight: bold;">'+user+'</span><a class="message">: '+text+'</a><br></div>'+wal
-       # open('ajax/wall.html','w').write(wal)
 
     def get_status(self, user):
         with open(self.PEX, 'r', encoding='utf-8') as f:
@@ -195,3 +186,34 @@ class Wall:
             content = post['time']+'  '+post['user'] + ' : ' + post['text']
             posts.append(content)
         return posts
+
+    def del_message(self, delete, status):
+        if int(status) == 9:
+            with open(self.WALL, 'r', encoding='utf-8') as f:
+                wall = json.load(f)
+            for i in range(len(wall["posts"])):
+                if (delete[0] == wall["posts"][i]['user']) and (delete[1] == wall["posts"][i]['time']):
+                    wall["posts"].pop(i)
+                    break
+            with open(self.WALL, 'w', encoding='utf-8') as f:
+                json.dump(wall, f)
+
+    def get_ban(self, ban, status):
+        if int(status) == 9:
+            with open(self.IP, 'r', encoding='utf-8') as f:
+                ips = json.load(f)
+            for i in ips:
+                if i == ban[0]:
+                    with open(self.BANIP, 'r', encoding='utf-8') as f:
+                        bans = json.load(f)
+                    bans['bans'].append(ips[i])
+                    with open(self.BANIP, 'w', encoding='utf-8') as f:
+                        json.dump(bans, f)
+                    break
+            with open(self.COOKIES, 'r', encoding='utf-8') as f:
+                cookie = json.load(f)
+            for i in cookie:
+                if cookie[i] == ban[0]:
+                    cookie[i] = None
+            with open(self.COOKIES, 'w', encoding='utf-8') as f:
+                json.dump(cookie, f)
